@@ -1,0 +1,18 @@
+Viewing Images:
+To view images you have stored in BMO's memory
+open View->Photos in the top menu bar. This will
+display a list of photos BMO has stored for
+you. Select one to view.
+
+Adding New Images:
+If you have more photos you want BMO to store,
+Put them on a USB stick and plug it into the
+front USB port. Open the drive using the drive
+icon in the lower left of the desktop. Select
+an image you want to store and then drag it to
+the image list.
+
+Deleting Images:
+To delete and image, just drag it from the
+image list to the trash can. The image should
+be gone forever (hopefully).

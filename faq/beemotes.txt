@@ -1,0 +1,37 @@
+BEEMOTES
+
+Playing Beemotes:
+From the main menu bar select:
+View->Beemotes
+
+This will bring up a list of availble beemotes
+you can try. Just double click the one you 
+want and BMO will play it.
+
+Adding New Beemotes:
+Have some new beemotes you want to add?
+Beemotes must be MP4 files. Simply put them on
+a USB drive and plug it into BMO. Open the disk
+icon in the lower left of the desktop. From 
+here you can drag the new emotes to the
+Beemotes folder. 
+
+Deleting Beemotes:
+To remove a beemote simply drag it from
+the Beemotes folder onto the trash icon.
+A satisfying response from BMO will
+indicate that it is gone forever.
+
+New Keyboard Mappings:
+To change which key play the beemotes you 
+can edit the bmo.txt file.
+
+A sample can be found at:
+http://www.byobmo.com/beemotes
+
+To install a new bmot.txt file:
+-Put the new bmo.txt file on a USB stick.
+-Plug it into BMO,
+-Open the disk icon.
+-Double click the bmo.txt file.
+-Select OK when promted.

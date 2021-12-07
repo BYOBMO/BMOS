@@ -1,0 +1,16 @@
+---------+---------+---------+---------+-----
+WIFI SETUP
+
+Before doing fun things like voice
+recognition you will need to setup 
+your WiFi.
+
+Select Edit->WiFi from main menu bar.
+
+In the form that appears:
+-Enter the SSID for your WiFi station.
+-Enter the passcode for your WiFi station.
+-Press OK to save WiFi settings. 
+
+The WiFi connection should connect in a
+few seconds. If it doesn't, try rebooting.

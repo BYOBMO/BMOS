@@ -1,0 +1,35 @@
+---------+---------+---------+---------+-----
+VOICE RECOGNITION
+
+Turn on voice recognition with menu option
+Edit->Audio
+
+Yes! BMO will listen to you. Will he obey? 
+That depends on what you have to say.
+
+And you will need Google Voice set up.
+
+Unfortunately it's a bit complicated getting
+BMO to listen.
+
+Follow the directions here to get started:
+http://byobmo.com/voice
+
+Once you have that set up, press and hold the
+read button (yes the red one! BMO will make
+a derp face inidcating that he is listening.
+If you say something intelligent, or BMO thinks
+it's intelligent, you should get a response.
+
+Some things to say:
+Hello.
+Are you a robot?
+It's my birthday.
+What time is it?
+What do homies do?
+Open the pod bay doors.
+Are you an iPad?
+Can I push the red button?
+Let's go on an adventure!
+
+

@@ -1,0 +1,47 @@
+For more info see:
+http://www.byobmo.com/videogames
+
+Playing Video Games:
+In face mode you can bring up the video game
+menu by pressin the ; key on the remote
+keyboard. In desktop mode use the menu option
+View->Video Games.
+
+WARNING! The arms will move up so keep clear.
+
+Emulation Station:
+This is the main launcher for all of the games.
+In general you can use the front buttons to
+pick a platform then a game to play.
+
+
+Although the front panel buttons can be used to
+play most games, you will need to use the
+remote keyboard or USB gamepad to start and
+exit games. (BMO doesn't have enough buttons)
+
+Game Controllers:
+Front buttons: These can be used in most games.
+Typically the green and red buttons control
+things like jump and fire.
+
+Keyboard: This can control all games but can
+be a little difficult due to the layout. 
+
+   1: Start one player game.
+   2: Start 2 player game.
+   5: Insert coin 
+   Backspace: Select button
+
+Hold Backspace and 1 to exit a game.
+
+USB Gamepad: This is the easiest way to play a 
+game. Since it has the most buttons and is the
+most intuitive layout.
+
+Holding both the Start and Select button on the
+keyboard ot gamepad will exit the game and
+return to Emulation Station.
+
+To exit Emulation Station hit F4 on the
+keyboard.

@@ -1,0 +1,6 @@
+FaceInterval:5
+Slideshow:0
+SlideInterval:5
+RandomVideo:0
+RandomVideoInterval:5
+VoiceRecognition:0

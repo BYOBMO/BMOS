@@ -1,0 +1,57 @@
+-----------------------
+Welcome to BMOS 3.1415
+-----------------------
+
+----------
+FACE MODE
+----------
+Face mode is the default mode where BMO
+displays random faces or video beemotes. The
+wireless keyboard is used to change faces or 
+play beemotes. Each key on the keyboard is 
+mapped to a particular face or beemote. to exit
+face mode, double click the green button.
+
+-------
+SERVOS
+-------
+BMO's arms are controlled by servos which can
+be ontrolled with specially mapped buttons on
+the remote keyboard.
+
+Shift-X: Wave right arm.
+Shift-Z: Wave left arm.
+Shift-C: Wave both arms.
+Shift-V: Arms down.
+Shift-B: Arms up.
+
+-------------
+DESKTOP MODE
+-------------
+You can access the BMO desktop by double
+clicking the green button.
+
+To navigate, use the D-Pad to highlight a menu
+then press the green button. The D-Pad will
+jump between actionable items. You cna also
+plug in a USB D-Pad controller.
+
+The touch pad on the remote keyboard can be
+uaed as a regular mouse or you can plug a
+mouse into the front USB to get finer control.
+
+The D-Pad can also be used as a hybrid mouse.
+Holding the blue button down for 2 seconds
+activates mouse mode where you can control the
+mouse cursor with the yellow D-Pad and the
+green button will act as the left mouse button.
+An icon on the right side of the main menu bar
+will indicate that mouse mode is active.
+
+On the desktop you can adjust BMO's settings,
+setup WiFi, read this awesome manual, watch
+videos, install new files and erase important
+files. Try it! Using a mouse, open the various
+file folders. Find the core system driver and
+drag it to the trash can.
+
