@@ -21,3 +21,12 @@ sudo apt-get install libsdl2-ttf-dev
   ```
 sudo apt-get install libsdl2-mixer-dev
 ```
+
+  ## Build
+  ```
+  mkdir build
+cd build
+cmake ..
+make
+make install
+```
