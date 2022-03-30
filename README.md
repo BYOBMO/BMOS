@@ -30,3 +30,13 @@ cmake ..
 make
 make install
 ```
+  
+## Manual Start
+  ```
+  /home/pi/bmos/bmos
+  ```
+  
+## Auto Start
+  ```
+  sudo cp /home/pi/bmos/scripts/10-bmos.sh /etc/profile.d
+  ```
