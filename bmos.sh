@@ -7,7 +7,7 @@ touch /home/pi/bmos/parade/parade.txt
 
 /home/pi/bmos/scripts/armsinit.sh
 /home/pi/bmos/scripts/armsupslow.sh &
-omxplayer --layer 10010 -o alsa --no-keys --no-osd /home/pi/bmos/videos/intro.mp4 &
+omxplayer --aspect-mode fill --layer 10010 -o alsa --no-keys --no-osd /home/pi/bmos/videos/intro.mp4 > /dev/null &
 
 cd /home/pi/bmos/
 /home/pi/bmos/bmos
