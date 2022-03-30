@@ -80,8 +80,9 @@ install(DIRECTORY servos DESTINATION /home/pi/bmos
                     GROUP_EXECUTE GROUP_READ)
 install(DIRECTORY videos DESTINATION /home/pi/bmos)
 
-install(FILES bmo.txt commands.conf DESTINATION /home/pi/bmos
+install(FILES bmos.sh bmo.txt commands.conf DESTINATION /home/pi/bmos
 PERMISSIONS  WORLD_WRITE GROUP_WRITE OWNER_WRITE
 	WORLD_READ GROUP_READ OWNER_READ)
+
 
 
