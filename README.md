@@ -39,5 +39,5 @@ make install
 ## Auto Start
   ```
   sudo cp /home/pi/bmos/scripts/10-bmos.sh /etc/profile.d
-  sudo +r /etc/profile.d/10-bmos.sh
+  sudo chmod +r /etc/profile.d/10-bmos.sh
   ```
