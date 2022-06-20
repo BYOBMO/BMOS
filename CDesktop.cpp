@@ -2543,6 +2543,12 @@ void CDesktop::PlayVideo(char* filename, int face)
 	sprintf(vide, "/home/pi/bmos/videos/%s", filename);
 	char c2;
 
+	if (wpid != 0)
+	{
+		printf("video playing...");
+		return;
+	}
+
 	char* argv[] = { (char*)"omxplayer", 
 		(char*)"--aspect-mode",
 		(char*)"fill",
