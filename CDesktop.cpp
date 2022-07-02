@@ -1860,6 +1860,12 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 			}
 
 		}
+		else if (e.keysym.sym == SDLK_UP)
+		{
+			int r1 = std::rand();
+			r1 = (r1 % mKeyMap.mRandomVids.size());
+			PlayVideo((char*)mKeyMap.mRandomVids[r1].c_str(), 0);
+		}
 		else if (e.keysym.sym == SDLK_RETURN)
 		{
 		}
