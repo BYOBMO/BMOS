@@ -71,6 +71,8 @@ public:
 	CFiles mPictures;
 	int mCurrentSlide;
 	int mCurrentFace;
+	int mCurrentVideo;
+
 	bool mRecording;
 	CSettings mSettings;
 	CWindow* mMouseOverWindow;

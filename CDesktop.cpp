@@ -182,6 +182,8 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 	//printf("CDesktop(%d, %d)\n", w, h);
 	using namespace std::placeholders;
 
+	mCurrentVideo = 0;
+
 	mCurrentFace = 0;
 	mFaces.GetFiles(CApplication::sBMOS_Root + "/faces/", "jpg");
 
@@ -1860,11 +1862,33 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 			}
 
 		}
-		else if (e.keysym.sym == SDLK_UP)
+		else if (e.keysym.sym == SDLK_DOWN)
 		{
 			int r1 = std::rand();
 			r1 = (r1 % mKeyMap.mRandomVids.size());
 			PlayVideo((char*)mKeyMap.mRandomVids[r1].c_str(), 0);
+		}
+		else if (e.keysym.sym == SDLK_UP)
+		{
+			CKeyCommand kc;
+
+			if (wpid != 0)
+			{
+				system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
+			}
+
+			int r1 = std::rand();
+			r1 = (r1 % mKeyMap.mKeyedVids.size());
+
+			kc = mKeyMap.GetKey(mKeyMap.mKeyedVids[r1]);
+			if (kc.mCommand == "mp4")
+			{
+				PlayVideo((char*)kc.mArgument1.c_str(), 0);
+				if (kc.mArgument2 != "")
+				{
+					SetFace(kc.mArgument2);
+				}
+			}
 		}
 		else if (e.keysym.sym == SDLK_RETURN)
 		{

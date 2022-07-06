@@ -13,5 +13,6 @@ public:
 
 	std::vector<CKeyCommand> mKeys;
 	std::vector<std::string> mRandomVids;
+	std::vector<std::string> mKeyedVids;
 };
 

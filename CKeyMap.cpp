@@ -15,6 +15,7 @@ bool CKeyMap::LoadFile(std::string config_file)
 {
     mKeys.clear();
     mRandomVids.clear();
+    mKeyedVids.clear();
 
     //fprintf(stderr, "Opening config file %s\n", config_file.c_str());
     ifstream file(config_file.c_str(), ios::in);
@@ -63,6 +64,11 @@ bool CKeyMap::LoadFile(std::string config_file)
                             cmd.mArgument2 = tok;
                         }
                         mKeys.push_back(cmd);
+
+                        if (cmd.mCommand == "mp4")
+                        {
+                            mKeyedVids.push_back(cmd.mKey);
+                        }
                     }
                 }
             }
