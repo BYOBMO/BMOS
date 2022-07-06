@@ -1771,7 +1771,10 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 		{
 			system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 		}
-		return(NULL);
+		if (e.keysym.sym != SDLK_UP)
+		{
+			return(NULL);
+		}
 	}
 
 	if ((e.keysym.sym == SDLK_LCTRL || e.keysym.sym == SDLK_RCTRL) && e.repeat == 0)
