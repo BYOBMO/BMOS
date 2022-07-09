@@ -1767,14 +1767,18 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 
 	if (wpid != 0)
 	{
-		if ((e.keysym.sym == SDLK_LSHIFT || e.keysym.sym == SDLK_RSHIFT || e.keysym.sym == SDLK_SPACE || e.keysym.sym == SDLK_ESCAPE) && e.repeat == 0)
+		if ((e.keysym.sym == SDLK_LSHIFT || e.keysym.sym == SDLK_RSHIFT || e.keysym.sym == SDLK_SPACE || e.keysym.sym == SDLK_ESCAPE || e.keysym.sym != SDLK_UP) && e.repeat == 0)
 		{
-			system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
+			if (e.keysym.sym != SDLK_UP && mVisible == false && mFace != NULL)
+			{
+				// Face mode. DPad can kill videos.
+			}
+			else
+			{
+				system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
+			}
 		}
-		if (e.keysym.sym != SDLK_UP)
-		{
-			return(NULL);
-		}
+		return(NULL);
 	}
 
 	if ((e.keysym.sym == SDLK_LCTRL || e.keysym.sym == SDLK_RCTRL) && e.repeat == 0)
@@ -1846,6 +1850,13 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 				mCurrentFace--;
 				mCurrentFace = std::max(mCurrentFace, 0);
 				SetFace(mCurrentFace);
+			}
+		}
+		else if (e.keysym.sym == SDLK_TAB)
+		{
+			if (mSettings.mSlideShow)
+			{
+				mSlideTimer = SDL_GetTicks() + mSettings.mSlideInterval * 1000;
 			}
 		}
 		else if (e.keysym.sym == SDLK_PERIOD || e.keysym.sym == SDLK_RIGHT)
@@ -2244,7 +2255,7 @@ void CDesktop::OnDiskDriveItemDoubleClick(CFolderForm* form, CListBoxItem* lbi)
 		mMessageBox->ShowMessage(str, "Install", CMessageBox::MessageStyle::OK_Cancel, CMessageBox::MessageAlign::Center);
 		mMessageBox->AddOnCloseHandler(std::bind(&CDesktop::OnConfirmInstallCredentials, this, _1, _2));
 	}
-	else if (itemText == "voice.txt")
+	else if (itemText == "commands.conf")
 	{
 		sprintf(str, "Install %s?", itemText.c_str());
 		mMessageBox->ShowMessage(str, "Install", CMessageBox::MessageStyle::OK_Cancel, CMessageBox::MessageAlign::Center);
@@ -2397,6 +2408,13 @@ void CDesktop::OnConfirmInstallBmoConfig(CMessageBox* box, CMessageBox::MessageR
 
 		CFiles::Copy(src, dst);
 		PlayVideo((char*)"ah.mp4", 0);
+		try
+		{
+			bool b = mKeyMap.LoadFile(CApplication::sBMOS_Root + "bmo.txt");
+		}
+		catch (...)
+		{
+		}
 	}
 	else if (result == CMessageBox::MessageResult::Cancel)
 	{
@@ -2453,11 +2471,21 @@ void CDesktop::OnConfirmInstallVoice(CMessageBox* box, CMessageBox::MessageResul
 	if (result == CMessageBox::MessageResult::OK)
 	{
 		//printf("OnConfirmInstallVoice OK\n");
-		std::string src = mDiskDrive->mPath + "/voice.txt";
-		std::string dst = CApplication::sBMOS_Root + "/voice.txt";
+		std::string src = mDiskDrive->mPath + "/commands.conf";
+		std::string dst = CApplication::sBMOS_Root + "/commands.conf";
 
 		CFiles::Copy(src, dst);
 		PlayVideo((char*)"ah.mp4", 0);
+		try
+		{
+			CVoiceCommand vc;
+
+			mVoiceCommands.GetConfig(CApplication::sBMOS_Root + "commands.conf");
+		}
+		catch (...)
+		{
+			printf("Error reading voice commands.\n");
+		}
 	}
 	else if (result == CMessageBox::MessageResult::Cancel)
 	{
