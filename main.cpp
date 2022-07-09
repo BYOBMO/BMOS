@@ -31,6 +31,10 @@
 #include "CForm.h"
 #include "CFile.h"
 
+#ifndef BMO
+#define BMO 1
+#endif
+
 #ifndef WINDOWS
 #include <unistd.h>
 #include <sys/wait.h>

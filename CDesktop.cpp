@@ -203,7 +203,7 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 	mFiles1.push_back(CFile("controls.bmochop.sys", RandomSize(), CFile::Type::BIN));
 	mFiles1.push_back(CFile("controls.bmokick.sys", RandomSize(), CFile::Type::BIN));
 	mFiles1.push_back(CFile("controls.brownnote.sys", RandomSize(), CFile::Type::BIN));
-	mFiles1.push_back(CFile("controls.ForceFild.sys", RandomSize(), CFile::Type::BIN));
+	mFiles1.push_back(CFile("controls.ForceField.sys", RandomSize(), CFile::Type::BIN));
 	mFiles1.push_back(CFile("Frownrecognition.sys", RandomSize(), CFile::Type::BIN));
 
 	mFiles2.push_back(CFile("Farerecognition.txt", RandomSize(), CFile::Type::TXT));
@@ -373,10 +373,17 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 	questions.push_back(CFile("How do I setup WiFi?", " ", CFile::Type::Q));
 	questions.push_back(CFile("Will BMO listen to me?", " ", CFile::Type::Q));
 	questions.push_back(CFile("How do I play video games?", " ", CFile::Type::Q));
+#if BMO
 	questions.push_back(CFile("How can I restore your damaged files?", " ", CFile::Type::Q));
+#endif
+
 	questions.push_back(CFile("What time is it?", " ", CFile::Type::Q));
 	questions.push_back(CFile("What do homies do?", " ", CFile::Type::Q));
+
+#if BMO
 	questions.push_back(CFile("Are you an iPad?", " ", CFile::Type::Q));
+#endif
+
 	//questions.push_back(CFile("Are you a robot?", " ", CFile::Type::Q));
 	//questions.push_back(CFile("Can you fix my shower?", " ", CFile::Type::Q));
 	//questions.push_back(CFile("What is 2 + 1?", " ", CFile::Type::Q));
