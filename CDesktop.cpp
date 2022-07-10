@@ -2373,7 +2373,7 @@ void CDesktop::OnConfirmShutdown(CMessageBox* box, CMessageBox::MessageResult re
 {
 	if (result == CMessageBox::MessageResult::OK)
 	{
-		SetFace("bmo17.jpg");
+		SetFace("blank.jpg");
 		SDL_Refresh();
 		PlayVideoSync((char*)"wet.mp4");
 		printf("Shutdown OK\n");
@@ -2394,7 +2394,7 @@ void CDesktop::OnConfirmReboot(CMessageBox* box, CMessageBox::MessageResult resu
 	if (result == CMessageBox::MessageResult::OK)
 	{
 		printf("Reboot OK\n");
-		SetFace("bmo17.jpg");
+		SetFace("blank.jpg");
 		SDL_Refresh();
 		PlayVideoSync((char*)"power.mp4");
 #ifndef WINDOWS
