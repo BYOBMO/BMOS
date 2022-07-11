@@ -42,7 +42,7 @@ void CVoiceProcess::GetConfig(std::string config_file)
             commands.push_back(c);
         }
         else if (line[0] != '#') {
-            printf("Formatting error on ine %d\n", i);
+            printf("Formatting error on line %d\n", i);
         }
         ++i;
     }

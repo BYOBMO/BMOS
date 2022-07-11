@@ -3,4 +3,4 @@ Slideshow:0
 SlideInterval:5
 RandomVideo:0
 RandomVideoInterval:5
-VoiceRecognition:0
+VoiceRecognition:1
