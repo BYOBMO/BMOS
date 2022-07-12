@@ -2443,7 +2443,14 @@ void CDesktop::OnConfirmUpdateBMOS(CMessageBox* box, CMessageBox::MessageResult 
 		system(update.c_str());
 #endif
 
-		PlayVideo((char*)"ah.mp4", 0);
+		//PlayVideo((char*)"ah.mp4", 0);
+		SDL_DestroyRenderer(CApplication::sRenderer);
+		SDL_DestroyWindow(CApplication::sWindow);
+
+		SDL_Quit();
+
+
+		exit(EXIT_SUCCESS);
 	}
 	else if (result == CMessageBox::MessageResult::Cancel)
 	{
