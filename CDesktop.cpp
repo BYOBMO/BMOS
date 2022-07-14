@@ -2931,8 +2931,8 @@ void CDesktop::ProcessGoogleVoice()
 
 	if (vc.mCommand == "")
 	{
-		printf("vc.mCommand no found\n");
-		PlayVideo("hmmm.mp4", 0);
+		printf("vc.mCommand not found\n");
+		PlayVideo((char*)"hmm.mp4", 0);
 	}
 	else if (vc.mCommand == "system")
 	{
