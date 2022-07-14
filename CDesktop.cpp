@@ -2901,7 +2901,7 @@ void CDesktop::EndRecord()
 	mRecordPid = 0;
 #else
 	CVoiceCommand vc;
-	vc = mVoiceCommands.ProcessMessage("say hi to");
+	vc = mVoiceCommands.ProcessMessage("");
 
 	printf("End recording.\n");
 #endif
@@ -2929,7 +2929,11 @@ void CDesktop::ProcessGoogleVoice()
 	printf("vc.mArgument=%s\n", vc.mArgument.c_str());
 	fclose(cmd);
 
-	if (vc.mCommand == "system")
+	if (vc.mCommand == "")
+	{
+		PlayVideo("hmmm.mp4", 0);
+	}
+	else if (vc.mCommand == "system")
 	{
 		system((vc.mArgument + "&").c_str());
 	}
