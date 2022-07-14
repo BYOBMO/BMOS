@@ -367,28 +367,29 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 
 	std::vector<CFile> questions;
 
-	questions.push_back(CFile("Getting started.", " ", CFile::Type::Q));
-	questions.push_back(CFile("How can I view images?", " ", CFile::Type::Q));
-	questions.push_back(CFile("What are beemotes?", " ", CFile::Type::Q));
-	questions.push_back(CFile("How do I setup WiFi?", " ", CFile::Type::Q));
-	questions.push_back(CFile("Will BMO listen to me?", " ", CFile::Type::Q));
-	questions.push_back(CFile("How do I play video games?", " ", CFile::Type::Q));
-#if BMO
-	questions.push_back(CFile("How can I restore your damaged files?", " ", CFile::Type::Q));
+	questions.push_back(CFile("Getting started.", " ", CFile::Type::Q, 1));
+	questions.push_back(CFile("How can I view images?", " ", CFile::Type::Q, 2));
+	questions.push_back(CFile("What are beemotes?", " ", CFile::Type::Q, 3));
+	questions.push_back(CFile("How do I setup WiFi?", " ", CFile::Type::Q, 4));
+	questions.push_back(CFile("Will BMO listen to me?", " ", CFile::Type::Q, 5));
+	questions.push_back(CFile("How do I play video games?", " ", CFile::Type::Q, 6));
+#if IS_BMO
+	questions.push_back(CFile("How can I restore your damaged files?", " ", CFile::Type::Q, 7));
 #endif
 
-	questions.push_back(CFile("What time is it?", " ", CFile::Type::Q));
-	questions.push_back(CFile("What do homies do?", " ", CFile::Type::Q));
+	questions.push_back(CFile("What time is it?", " ", CFile::Type::Q, 8));
+	questions.push_back(CFile("What do homies do?", " ", CFile::Type::Q, 9));
 
-#if BMO
-	questions.push_back(CFile("Are you an iPad?", " ", CFile::Type::Q));
+#if IS_BMO
+	questions.push_back(CFile("Are you an iPad?", " ", CFile::Type::Q, 10));
+	questions.push_back(CFile("Open the pod bay doors.", " ", CFile::Type::Q, 11));
 #endif
 
 	//questions.push_back(CFile("Are you a robot?", " ", CFile::Type::Q));
 	//questions.push_back(CFile("Can you fix my shower?", " ", CFile::Type::Q));
 	//questions.push_back(CFile("What is 2 + 1?", " ", CFile::Type::Q));
 	//questions.push_back(CFile("Can I push the red button?", " ", CFile::Type::Q));
-	//questions.push_back(CFile("Open the pod bay doors.", " ", CFile::Type::Q));
+	
 
 
 	mFAQ = new CFolder();
@@ -950,8 +951,9 @@ void CDesktop::OnFAQItemDoubleClick(CFolderForm* form, CListBoxItem* lbi)
 {
 	//printf("Double click %s\n", lbi->mColumn1.c_str());
 
-	if (lbi->mColumn1 == "How can I restore your damaged files?")
+	if (lbi->mTag == 7) 
 	{
+		// How can I restore your damaged files?
 		if (mOSStatus == false)
 		{
 			PlayVideo((char*)"mofactory.mp4", 0);
@@ -1005,8 +1007,9 @@ void CDesktop::OnFAQItemDoubleClick(CFolderForm* form, CListBoxItem* lbi)
 			PlayVideo((char*)"ipad2.mp4", 0);
 		}
 	}
-	else if (lbi->mColumn1 == "Getting started.")
+	else if (lbi->mTag == 1)
 	{
+		// Getting started.
 		ShowTextFile("Getting Started", CApplication::sBMOS_Root + "/faq/manual.txt");
 	}
 	else if (lbi->mColumn1 == "What are beemotes?")

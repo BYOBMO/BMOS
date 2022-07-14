@@ -12,6 +12,7 @@ public:
     unsigned mBgColorSelect = 0xCCFFCC;
     unsigned mDrawColor = 0xFFFFFF;
     int mMinWidth;
+    int mTag;
     CFile::Type mIconType;
 
     int mLastMouseX, mLastMouseY;

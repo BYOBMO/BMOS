@@ -34,6 +34,15 @@ void CFile::Deinit()
 
 CFile::CFile(std::string name, std::string size, Type fileType)
 {
+	mTag = 0;
+	mName = name;
+	mSize = size;
+	mType = fileType;
+}
+
+CFile::CFile(std::string name, std::string size, Type fileType, int tag)
+{
+	mTag = tag;
 	mName = name;
 	mSize = size;
 	mType = fileType;

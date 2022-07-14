@@ -29,11 +29,12 @@ public:
 	static void Deinit();
 	static Type MapType(std::string ext);
 
+	int mTag;
 	std::string mName;
 	std::string mSize;
 	Type mType;
 
 	CFile(std::string name, std::string size, Type fileType);
-
+	CFile(std::string name, std::string size, Type fileType, int tag);
 };
 

@@ -85,6 +85,7 @@ void CFolder::CreateFileList(bool draggable)
 		lbi->AddDoubleClickHandler(std::bind(&CFolderForm::OnListItemDoubleClick, mForm, _1));
 		
 		lbi->mDraggable = draggable;
+		lbi->mTag = mFiles[i].mTag;
 	}
 
 	mForm->SizeToListbox();

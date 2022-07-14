@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef IS_BMO
+#define IS_BMO 1
+#endif
+
 #include<string>
 
 #define RChannel(hex) (Uint8)((hex >> 16) & (unsigned int)0xff) 

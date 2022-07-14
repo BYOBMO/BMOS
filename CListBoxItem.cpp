@@ -10,7 +10,7 @@ CListBoxItem::CListBoxItem() : CWindow()
 	mLastMouseX = 0;
 	mLastMouseY = 0;
 	mColor = CText::cBlack;
-	
+	mTag = 0;
 	mMinWidth = 0;
 	mColumn1 = "";
 	mColumn2 = "";
