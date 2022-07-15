@@ -1418,33 +1418,39 @@ void CDesktop::Update()
 
 		if (mSettings.mSlideShow)
 		{
-			std::string path;
-			path = CApplication::sBMOS_Root + "/pictures/";
+			if (mVoiceReboot == false && mVoiceShutdown == false)
+			{
+				std::string path;
+				path = CApplication::sBMOS_Root + "/pictures/";
 
-			if (mPictures.mFiles.size() == 0)
-			{
-				mSettings.mSlideShow = false;
-			}
-			else if (SDL_TICKS_PASSED_FIXED(ticks, mSlideTimer))
-			{
-				mCurrentSlide++;
-				if (mCurrentSlide >= mPictures.mFiles.size())
+				if (mPictures.mFiles.size() == 0)
 				{
-					mCurrentSlide = 0;
+					mSettings.mSlideShow = false;
 				}
-				SetFace(path, mPictures.mFiles[mCurrentSlide]);
-				mSlideTimer = SDL_GetTicks() + mSettings.mSlideInterval * 1000;
+				else if (SDL_TICKS_PASSED_FIXED(ticks, mSlideTimer))
+				{
+					mCurrentSlide++;
+					if (mCurrentSlide >= mPictures.mFiles.size())
+					{
+						mCurrentSlide = 0;
+					}
+					SetFace(path, mPictures.mFiles[mCurrentSlide]);
+					mSlideTimer = SDL_GetTicks() + mSettings.mSlideInterval * 1000;
+				}
 			}
 		}
 		else if (SDL_TICKS_PASSED_FIXED(ticks, mFaceTimer))
 		{
-			mCurrentFace++;
-			if (mCurrentFace >= mFaces.mFiles.size())
+			if (mVoiceReboot == false && mVoiceShutdown == false)
 			{
-				mCurrentFace = 0;
+				mCurrentFace++;
+				if (mCurrentFace >= mFaces.mFiles.size())
+				{
+					mCurrentFace = 0;
+				}
+				SetFace(mCurrentFace);
+				mFaceTimer = SDL_GetTicks() + mSettings.mFaceInterval * 1000;
 			}
-			SetFace(mCurrentFace);
-			mFaceTimer = SDL_GetTicks() + mSettings.mFaceInterval * 1000;
 		}
 
 	}
