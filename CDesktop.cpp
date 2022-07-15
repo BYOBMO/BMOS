@@ -1631,7 +1631,7 @@ CWindow* CDesktop::OnKeyUp(SDL_KeyboardEvent e)
 	if ((e.keysym.sym == SDLK_LCTRL || e.keysym.sym == SDLK_RCTRL)  && mRecording == true)
 	{
 		mRecording = false;
-		EndRecord();
+
 		if (mVisible)
 		{
 			delete(mFace);
@@ -1641,6 +1641,7 @@ CWindow* CDesktop::OnKeyUp(SDL_KeyboardEvent e)
 		{
 			SetFace(0);
 		}
+		EndRecord();
 		return(NULL);
 	}
 
