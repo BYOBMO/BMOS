@@ -134,6 +134,9 @@ CDesktop::CDesktop(): CWindow()
 	mOSStatus = true;
 	sDesktop = this;
 
+	mVoiceReboot = false;
+	mVoiceShutdown = false;
+
 	mFace = NULL;
 	mCursor = NULL;
 	mTrash = NULL;
@@ -2372,19 +2375,36 @@ void CDesktop::Draw()
 
 }
 
+void CDesktop::shutdown()
+{
+	SetFace("blank.jpeg");
+	SDL_Refresh();
+	PlayVideoSync((char*)"wet.mp4");
+	printf("Shutdown OK\n");
+#ifndef WINDOWS
+	system("sudo halt");
+#endif
+	exit(EXIT_SUCCESS);
+}
+
+void CDesktop::reboot()
+{
+	printf("Reboot OK\n");
+	SetFace("blank.jpeg");
+	SDL_Refresh();
+	PlayVideoSync((char*)"power.mp4");
+#ifndef WINDOWS
+	system("sudo reboot");
+#endif
+
+	exit(EXIT_SUCCESS);
+}
+
 void CDesktop::OnConfirmShutdown(CMessageBox* box, CMessageBox::MessageResult result)
 {
 	if (result == CMessageBox::MessageResult::OK)
 	{
-		SetFace("blank.jpeg");
-		SDL_Refresh();
-		PlayVideoSync((char*)"wet.mp4");
-		printf("Shutdown OK\n");
-#ifndef WINDOWS
-		system("sudo halt");
-#endif
-
-		exit(EXIT_SUCCESS);
+		shutdown();
 	}
 	else if (result == CMessageBox::MessageResult::Cancel)
 	{
@@ -2396,15 +2416,7 @@ void CDesktop::OnConfirmReboot(CMessageBox* box, CMessageBox::MessageResult resu
 {
 	if (result == CMessageBox::MessageResult::OK)
 	{
-		printf("Reboot OK\n");
-		SetFace("blank.jpeg");
-		SDL_Refresh();
-		PlayVideoSync((char*)"power.mp4");
-#ifndef WINDOWS
-		system("sudo reboot");
-#endif
-
-		exit(EXIT_SUCCESS);
+		reboot();
 	}
 	else if (result == CMessageBox::MessageResult::Cancel)
 	{
@@ -2927,15 +2939,40 @@ void CDesktop::ProcessGoogleVoice()
 	printf("Cmd: %s\n", command.c_str());
 	printf("Mess: %s\n", message);
 
+	std::string msg = message;
+
 	vc = mVoiceCommands.ProcessMessage(message);
 	printf("vc.mCommand=%s\n", vc.mCommand.c_str());
 	printf("vc.mArgument=%s\n", vc.mArgument.c_str());
 	fclose(cmd);
 
-	if (vc.mCommand == "")
+	if (msg == "confirm")
+	{
+		if (mVoiceShutdown == true)
+		{
+			shutdown();
+		}
+		else if (mVoiceReboot == true)
+		{
+			reboot();
+		}
+	}
+	else if (vc.mCommand == "")
 	{
 		printf("vc.mCommand not found\n");
 		PlayVideo((char*)"hmm.mp4", 0);
+	}
+	else if (vc.mCommand == "shutdown")
+	{
+		mVoiceShutdown = true;
+		SetFace("shutdown.jpeg");
+		return;
+	}
+	else if (vc.mCommand == "reboot")
+	{
+		mVoiceReboot = true;
+		SetFace("reboot.jpeg");
+		return;
 	}
 	else if (vc.mCommand == "system")
 	{
@@ -2971,5 +3008,7 @@ void CDesktop::ProcessGoogleVoice()
 		}
 	}
 #endif
+	mVoiceShutdown = false;
+	mVoiceReboot = false;
 }
 

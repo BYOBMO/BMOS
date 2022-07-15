@@ -73,6 +73,9 @@ public:
 	int mCurrentFace;
 	int mCurrentVideo;
 
+	bool mVoiceShutdown;
+	bool mVoiceReboot;
+
 	bool mRecording;
 	CSettings mSettings;
 	CWindow* mMouseOverWindow;
@@ -206,6 +209,7 @@ public:
 	void PlayVideoUSB(char* filename, int face);
 	void PlayVideoSync(char* filename);
 
-
+	void shutdown();
+	void reboot();
 };
 
