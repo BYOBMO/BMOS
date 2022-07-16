@@ -2971,15 +2971,29 @@ void CDesktop::ProcessGoogleVoice()
 	}
 	else if (vc.mCommand == "shutdown")
 	{
-		mVoiceShutdown = true;
-		SetFace("shutdown.jpeg");
-		return;
+		if (vc.mArgument == "noconfirm")
+		{
+			shutdown();
+		}
+		else
+		{
+			mVoiceShutdown = true;
+			SetFace("shutdown.jpeg");
+			return;
+		}
 	}
 	else if (vc.mCommand == "reboot")
 	{
-		mVoiceReboot = true;
-		SetFace("reboot.jpeg");
-		return;
+		if (vc.mArgument == "noconfirm")
+		{
+			reboot();
+		}
+		else
+		{
+			mVoiceReboot = true;
+			SetFace("reboot.jpeg");
+			return;
+		}
 	}
 	else if (vc.mCommand == "system")
 	{
