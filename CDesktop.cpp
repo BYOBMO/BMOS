@@ -2997,7 +2997,14 @@ void CDesktop::ProcessGoogleVoice()
 	}
 	else if (vc.mCommand == "system")
 	{
-		system((vc.mArgument + "&").c_str());
+		if (vc.mCommand.find("parade.sh") != std::string::npos)
+		{
+			system((vc.mArgument).c_str());
+		}
+		else
+		{
+			system((vc.mArgument + "&").c_str());
+		}
 	}
 	else if (vc.mCommand == "mp4")
 	{
