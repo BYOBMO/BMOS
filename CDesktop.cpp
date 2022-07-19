@@ -365,7 +365,7 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 	mAudioForm->Hide();
 
 	mWiFiForm = new CWiFi(150, 50, 500, 275);
-	mWiFiForm->SetTitle("WiFI Settings");
+	mWiFiForm->SetTitle("WiFi Settings");
 	mWiFiForm->Hide();
 
 	std::vector<CFile> questions;
@@ -1967,7 +1967,15 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 		else if (e.keysym.sym == SDLK_RETURN)
 		{
 		}
+		else if (sFocused != NULL && sFocused->mID != "0" && sFocused->IsVisible())
+		{
+			//sFocused->mSelected = true; XXX
 
+			if (sFocused != this)
+			{
+				sFocused->KeyDown(e);
+			}
+		}
 		return(NULL);
 	}
 
