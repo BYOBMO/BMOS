@@ -2997,7 +2997,7 @@ void CDesktop::ProcessGoogleVoice()
 	}
 	else if (vc.mCommand == "system")
 	{
-		if (vc.mCommand.find("parade.sh") != std::string::npos)
+		if (vc.mArgument.find("parade.sh") != std::string::npos)
 		{
 			system((vc.mArgument).c_str());
 		}
