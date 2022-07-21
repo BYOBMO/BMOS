@@ -1967,7 +1967,7 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 		else if (e.keysym.sym == SDLK_RETURN)
 		{
 		}
-		else if (sFocused != NULL && sFocused->mID != "0" && sFocused->IsVisible())
+		else if (e.keysym.sym == SDLK_BACKSPACE && sFocused != NULL && sFocused->mID != "0" && sFocused->IsVisible())
 		{
 			//sFocused->mSelected = true; XXX
 
