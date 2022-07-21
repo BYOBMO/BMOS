@@ -162,6 +162,15 @@ CDesktop::CDesktop(): CWindow()
 
 	try
 	{
+		mJoystick.GetConfig(CApplication::sBMOS_Root + "joystick.txt");
+	}
+	catch (...)
+	{
+		printf("Error reading voice commands.\n");
+	}
+
+	try
+	{
 		CVoiceCommand vc;
 
 		mVoiceCommands.GetConfig(CApplication::sBMOS_Root + "commands.conf");
@@ -1357,8 +1366,8 @@ void CDesktop::GetJoystickAxis(bool* left, bool* right, bool* up, bool* down)
 		return;
 	}
 
-	x_move = SDL_JoystickGetAxis(CApplication::sGameController, gJoyAxisX);
-	y_move = SDL_JoystickGetAxis(CApplication::sGameController, gJoyAxisY);
+	x_move = SDL_JoystickGetAxis(CApplication::sGameController, mJoystick.mJoyAxisX);
+	y_move = SDL_JoystickGetAxis(CApplication::sGameController, mJoystick.mJoyAxisY);
 
 
 
@@ -1534,7 +1543,7 @@ void CDesktop::Update()
 	
 	if (CApplication::sGameController != NULL)
 	{
-		jbut = SDL_JoystickGetButton(CApplication::sGameController, gJoyX);
+		jbut = SDL_JoystickGetButton(CApplication::sGameController, mJoystick.mJoyX);
 	}
 
 

@@ -68,16 +68,6 @@ int dispW, dispH;
 CDesktop *gDesktop;
 SDL_Joystick *gGameController;
 
-int gJoyA = 1;
-int gJoyB = 2;
-int gJoyX = 0;
-int gJoyY = 3;
-int gJoyStart = 9;
-int gJoySelect = 8;
-int gJoyRT = 5;
-int gJoyLT = 4;
-int gJoyAxisY=4;
-int gJoyAxisX=0;
 
 enum GameMode
 {
@@ -180,6 +170,7 @@ bool init()
 	else
 	{
 		//Load joystick
+
 		gGameController = SDL_JoystickOpen(0);
 		if (gGameController == NULL)
 		{
@@ -492,11 +483,19 @@ void handleDesktop(SDL_Event e)
 		if (e.key.keysym.sym == SDLK_F4)
 		{
 			const Uint8* state = SDL_GetKeyboardState(NULL);
-			if (state[SDL_SCANCODE_LSHIFT] == true)
+			if (state[SDL_SCANCODE_LALT] == true)
 			{
 				SDL_Event ee;
 				ee.type = SDL_QUIT;
 				SDL_PushEvent(&ee);
+			}
+		}
+		else if (e.key.keysym.sym == SDLK_j)
+		{
+			const Uint8* state = SDL_GetKeyboardState(NULL);
+			if (state[SDL_SCANCODE_LCTRL] == true)
+			{
+
 			}
 		}
 		CWindow::sMouseClickHandled = NULL;
@@ -545,24 +544,24 @@ void handleDesktop(SDL_Event e)
 	{
 		SDL_Event evt;
 		//printf("down %d\n", e.jbutton.button);
-		if (e.jbutton.button == gJoyA)
+		if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
 		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LCTRL;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
 		}
-		else if (e.jbutton.button == gJoyB)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyB)
 		{
 		}
-		else if (e.jbutton.button == gJoyX)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyX)
 		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LSHIFT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
 		}
-		else if (e.jbutton.button == gJoyY)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyY)
 		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LALT;
@@ -575,24 +574,24 @@ void handleDesktop(SDL_Event e)
 		SDL_Event evt;
 		//printf("up %d\n", e.jbutton.button);
 
-		if (e.jbutton.button == gJoyA)
+		if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
 		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LCTRL;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
 		}
-		else if (e.jbutton.button == gJoyB)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyB)
 		{
 		}
-		else if (e.jbutton.button == gJoyX)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyX)
 		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LSHIFT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
 		}
-		else if (e.jbutton.button == gJoyY)
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyY)
 		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LALT;
@@ -608,7 +607,7 @@ void handleDesktop(SDL_Event e)
 		if (e.jaxis.which == 0)
 		{
 			//X axis motion
-			if (e.jaxis.axis == gJoyAxisX)
+			if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisX)
 			{
 				//Left of dead zone
 				if (e.jaxis.value < -8000)
@@ -639,7 +638,7 @@ void handleDesktop(SDL_Event e)
 				}
 			}
 			//Y axis motion
-			else if (e.jaxis.axis == gJoyAxisY)
+			else if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisY)
 			{
 				//Below of dead zone
 				if (e.jaxis.value < -8000)

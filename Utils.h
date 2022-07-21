@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef IS_BMO
-#define IS_BMO 1
+#define IS_BMO 0
 #endif
 
 #include<string>
@@ -19,13 +19,3 @@ std::string RandomSize();
 // A simple boolean comparison should fix it.
 #define SDL_TICKS_PASSED_FIXED(A, B)  (A>B)
 
-extern int gJoyA;
-extern int gJoyB;
-extern int gJoyX;
-extern int gJoyY;
-extern int gJoyStart;
-extern int gJoySelect;
-extern int gJoyRT;
-extern int gJoyLT;
-extern int gJoyAxisY;
-extern int gJoyAxisX;

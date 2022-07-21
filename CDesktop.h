@@ -24,6 +24,7 @@
 #include "CIcon.h"
 #include "CForm.h"
 
+#include "CJoystick.h"
 #include "CDropDownMenu.h"
 #include "CDragWindow.h"
 #include "CSettingsForm.h"
@@ -78,6 +79,8 @@ public:
 
 	bool mRecording;
 	CSettings mSettings;
+	CJoystick mJoystick;
+
 	CWindow* mMouseOverWindow;
 	std::vector<CSurfWindow*> mSurfWindows;
 	std::vector<CFile>mFiles1;

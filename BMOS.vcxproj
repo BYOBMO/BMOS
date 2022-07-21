@@ -139,6 +139,7 @@
     <ClCompile Include="CFolderForm.cpp" />
     <ClCompile Include="CForm.cpp" />
     <ClCompile Include="CIcon.cpp" />
+    <ClCompile Include="CJoystick.cpp" />
     <ClCompile Include="CKeyCommand.cpp" />
     <ClCompile Include="CKeyMap.cpp" />
     <ClCompile Include="CLabel.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="CFolderForm.h" />
     <ClInclude Include="CForm.h" />
     <ClInclude Include="CIcon.h" />
+    <ClInclude Include="CJoystick.h" />
     <ClInclude Include="CKeyCommand.h" />
     <ClInclude Include="CKeyMap.h" />
     <ClInclude Include="CLabel.h" />
