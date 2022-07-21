@@ -1357,8 +1357,8 @@ void CDesktop::GetJoystickAxis(bool* left, bool* right, bool* up, bool* down)
 		return;
 	}
 
-	x_move = SDL_JoystickGetAxis(CApplication::sGameController, 0);
-	y_move = SDL_JoystickGetAxis(CApplication::sGameController, 1);
+	x_move = SDL_JoystickGetAxis(CApplication::sGameController, gJoyAxisX);
+	y_move = SDL_JoystickGetAxis(CApplication::sGameController, gJoyAxisY);
 
 
 

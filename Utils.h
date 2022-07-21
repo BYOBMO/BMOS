@@ -27,3 +27,5 @@ extern int gJoyStart;
 extern int gJoySelect;
 extern int gJoyRT;
 extern int gJoyLT;
+extern int gJoyAxisY;
+extern int gJoyAxisX;

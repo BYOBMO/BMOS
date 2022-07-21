@@ -76,6 +76,8 @@ int gJoyStart = 9;
 int gJoySelect = 8;
 int gJoyRT = 5;
 int gJoyLT = 4;
+int gJoyAxisY=4;
+int gJoyAxisX=0;
 
 enum GameMode
 {
@@ -601,12 +603,12 @@ void handleDesktop(SDL_Event e)
 	else if (e.type == SDL_JOYAXISMOTION)
 	{
 		SDL_Event evt;
-
+		printf("axis %d %d\n", e.jaxis.axis, e.jaxis.value);
 		//Motion on controller 0
 		if (e.jaxis.which == 0)
 		{
 			//X axis motion
-			if (e.jaxis.axis == 0)
+			if (e.jaxis.axis == gJoyAxisX)
 			{
 				//Left of dead zone
 				if (e.jaxis.value < -8000)
@@ -637,7 +639,7 @@ void handleDesktop(SDL_Event e)
 				}
 			}
 			//Y axis motion
-			else if (e.jaxis.axis == 1)
+			else if (e.jaxis.axis == gJoyAxisY)
 			{
 				//Below of dead zone
 				if (e.jaxis.value < -8000)
