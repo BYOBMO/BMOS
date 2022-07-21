@@ -68,6 +68,15 @@ int dispW, dispH;
 CDesktop *gDesktop;
 SDL_Joystick *gGameController;
 
+int gJoyA = 1;
+int gJoyB = 2;
+int gJoyX = 0;
+int gJoyY = 3;
+int gJoyStart = 9;
+int gJoySelect = 8;
+int gJoyRT = 5;
+int gJoyLT = 4;
+
 enum GameMode
 {
 	Desktop,
@@ -534,58 +543,59 @@ void handleDesktop(SDL_Event e)
 	{
 		SDL_Event evt;
 		//printf("down %d\n", e.jbutton.button);
-		switch (e.jbutton.button)
+		if (e.jbutton.button == gJoyA)
 		{
-		case 0:
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LCTRL;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-		break;
-		case 1:
-			break;
-		case 2:
+		}
+		else if (e.jbutton.button == gJoyB)
+		{
+		}
+		else if (e.jbutton.button == gJoyX)
+		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LSHIFT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-			break;
-		case 3:
+		}
+		else if (e.jbutton.button == gJoyY)
+		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LALT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-			break;
 		}
 	}
 	else if (e.type == SDL_JOYBUTTONUP)
 	{
 		SDL_Event evt;
 		//printf("up %d\n", e.jbutton.button);
-		switch (e.jbutton.button)
+
+		if (e.jbutton.button == gJoyA)
 		{
-		case 0:
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LCTRL;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-		break;
-		case 1:
-			break;
-		case 2:
+		}
+		else if (e.jbutton.button == gJoyB)
+		{
+		}
+		else if (e.jbutton.button == gJoyX)
+		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LSHIFT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-			break;
-		case 3:
+		}
+		else if (e.jbutton.button == gJoyY)
+		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LALT;
 			evt.key.repeat = 0;
 			SDL_PushEvent(&evt);
-			break;
-
-
 		}
 	}
 	else if (e.type == SDL_JOYAXISMOTION)
