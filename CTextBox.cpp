@@ -63,12 +63,14 @@ void CTextBox::KeyDown(SDL_KeyboardEvent e)
 	{
 		std::string newText = mText.mText;
 
-		newText.pop_back();
-		if (newText == "")
+		if (newText.length() > 0)
 		{
-			newText = "";
+			newText.pop_back();
+			if (newText == "")
+			{
+				newText = "";
+			}
 		}
-
 		mText.SetText(CText::sFontSmall, newText, CText::cBlack, 300, 40, CTexture::HAlignment::Left);
 	}
 }
