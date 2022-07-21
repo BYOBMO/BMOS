@@ -1534,7 +1534,7 @@ void CDesktop::Update()
 	
 	if (CApplication::sGameController != NULL)
 	{
-		jbut = SDL_JoystickGetButton(CApplication::sGameController, 2);
+		jbut = SDL_JoystickGetButton(CApplication::sGameController, gJoyX);
 	}
 
 

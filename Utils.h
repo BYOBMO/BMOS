@@ -18,3 +18,12 @@ std::string RandomSize();
 // large enough then the number will wrap around.
 // A simple boolean comparison should fix it.
 #define SDL_TICKS_PASSED_FIXED(A, B)  (A>B)
+
+extern int gJoyA;
+extern int gJoyB;
+extern int gJoyX;
+extern int gJoyY;
+extern int gJoyStart;
+extern int gJoySelect;
+extern int gJoyRT;
+extern int gJoyLT;
