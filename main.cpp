@@ -493,7 +493,7 @@ void handleDesktop(SDL_Event e)
 		else if (e.key.keysym.sym == SDLK_j)
 		{
 			const Uint8* state = SDL_GetKeyboardState(NULL);
-			if (state[SDL_SCANCODE_LCTRL] == true)
+			if (state[SDL_SCANCODE_LALT] == true)
 			{
 				gDesktop->StartConfigureJoystick();
 			}
