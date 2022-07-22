@@ -80,6 +80,7 @@ public:
 	bool mRecording;
 	CSettings mSettings;
 	CJoystick mJoystick;
+	int mConfigureJoystick;
 
 	CWindow* mMouseOverWindow;
 	std::vector<CSurfWindow*> mSurfWindows;
@@ -102,7 +103,7 @@ public:
 	CFolder* mDiskDrive;
 	CFolder* mPhotos;
 	CFolder* mBeemotes;
-
+	CLabel* mLabel;
 
 	CDesktop();
 	CDesktop(int w, int h);
@@ -211,6 +212,11 @@ public:
 	void PlayVideo(char* filename, int face);
 	void PlayVideoUSB(char* filename, int face);
 	void PlayVideoSync(char* filename);
+
+	void StartConfigureJoystick();
+	void EndConfigureJoystick();
+	void ConfigureJoystick(Uint32 type, Uint8 val, int val2);
+	void ShowJoystick();
 
 	void shutdown();
 	void reboot();

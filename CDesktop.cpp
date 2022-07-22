@@ -14,6 +14,7 @@
 //along with BMOS.If not, see < https://www.gnu.org/licenses/>.
 
 #include "CDesktop.h"
+#include "CLabel.h"
 #include "CMenuBarItem.h"
 #include "CDropDownMenu.h"
 #include "CSettingsForm.h"
@@ -134,8 +135,11 @@ CDesktop::CDesktop(): CWindow()
 	mOSStatus = true;
 	sDesktop = this;
 
+	mLabel = NULL;
+
 	mVoiceReboot = false;
 	mVoiceShutdown = false;
+	mConfigureJoystick = -1;
 
 	mFace = NULL;
 	mCursor = NULL;
@@ -436,6 +440,12 @@ CDesktop::CDesktop(int w, int h): CDesktop()
 	AddWinForm(mSettingsForm);
 	AddWinForm(mAudioForm);
 	AddWinForm(mWiFiForm);
+
+	mLabel = new CLabel();
+	this->AddWindow(mLabel);
+	mLabel->SetPosition(200, 550);
+	mLabel->SetText("Text", CText::sFontSmall, 400, 40);
+	mLabel->mVisible = false;
 }
 
 void CDesktop::LoadSettings()
@@ -1209,6 +1219,11 @@ void CDesktop::LayoutWindows()
 	{
 		AddWindow(mDragWindow);
 	}
+
+	if (mLabel != NULL && mLabel->mVisible)
+	{
+		AddWindow(mLabel);
+	}
 }
 
 
@@ -1361,10 +1376,11 @@ void CDesktop::GetJoystickAxis(bool* left, bool* right, bool* up, bool* down)
 	*up = false;
 	*down = false;
 
-	if (CApplication::sGameController == NULL)
+	if (CApplication::sGameController == NULL || mJoystick.mJoyAxisX==-1 || mJoystick.mJoyAxisY==-1)
 	{
 		return;
 	}
+
 
 	x_move = SDL_JoystickGetAxis(CApplication::sGameController, mJoystick.mJoyAxisX);
 	y_move = SDL_JoystickGetAxis(CApplication::sGameController, mJoystick.mJoyAxisY);
@@ -1538,7 +1554,16 @@ void CDesktop::Update()
 	right = false;
 
 	bool jup, jdown, jleft, jright;
-	GetJoystickAxis(&jleft, &jright, &jup, &jdown);
+
+	jup = false;
+	jdown = false;
+	jleft = false;
+	jright = false;
+
+	if (mConfigureJoystick == -1)
+	{
+		GetJoystickAxis(&jleft, &jright, &jup, &jdown);
+	}
 	Uint8 jbut = false;
 	
 	if (CApplication::sGameController != NULL)
@@ -1719,6 +1744,16 @@ CWindow* CDesktop::OnKeyUp(SDL_KeyboardEvent e)
 
 void CDesktop::OnTextEvent(SDL_TextInputEvent e)
 {
+	if (mConfigureJoystick != -1)
+	{
+		std::string text = e.text;
+		if (text == " ")
+		{
+			ConfigureJoystick(-1, -1, -1);
+		}
+		return;
+	}
+	
 	if (mVisible == false && mFace != NULL)
 	{
 		// Face mode
@@ -3057,3 +3092,190 @@ void CDesktop::ProcessGoogleVoice()
 	mVoiceReboot = false;
 }
 
+void CDesktop::StartConfigureJoystick()
+{
+	mConfigureJoystick = 0;
+	mLabel->SetText("", CText::sFontSmall, 400, 40);
+	mLabel->mVisible = true;
+	ShowJoystick();
+}
+
+void CDesktop::EndConfigureJoystick()
+{
+	mConfigureJoystick = -1;
+	mLabel->SetText("", CText::sFontSmall, 400, 40);
+	mLabel->mVisible = false;
+	mJoystick.SaveFile(CApplication::sBMOS_Root + "joystick.txt");
+	LayoutWindows();
+}
+
+void CDesktop::ConfigureJoystick(Uint32 type, Uint8 val, int val2)
+{
+	printf("type=%i, val=%i, val2=%i\n", type, val, val2);
+	int v = val;
+
+	if (type == -1)
+	{
+		switch (mConfigureJoystick)
+		{
+		case 0:
+			mJoystick.mJoyA = -1;
+			break;
+
+		case 1:
+			mJoystick.mJoyB = -1;
+			break;
+
+		case 2:
+			mJoystick.mJoyX = -1;
+			break;
+
+		case 3:
+			mJoystick.mJoyY = -1;
+			break;
+
+		case 4:
+			mJoystick.mJoySelect = -1;
+			break;
+
+		case 5:
+			mJoystick.mJoyStart = -1;
+			break;
+
+		case 6:
+			mJoystick.mJoyLT = -1;
+			break;
+
+		case 7:
+			mJoystick.mJoyRT = -1;
+			break;
+
+		case 8:
+			mJoystick.mJoyAxisX = -1;
+			break;
+
+		case 9:
+			mJoystick.mJoyAxisY = -1;
+			break;
+		}
+
+		mConfigureJoystick++;
+	}
+	else if (type == SDL_JOYBUTTONDOWN)
+	{
+		if (mConfigureJoystick == 0)
+		{
+			mJoystick.mJoyA = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 1)
+		{
+			mJoystick.mJoyB = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 2)
+		{
+			mJoystick.mJoyX = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 3)
+		{
+			mJoystick.mJoyY = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 4)
+		{
+			mJoystick.mJoySelect = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 5)
+		{
+			mJoystick.mJoyStart = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 6)
+		{
+			mJoystick.mJoyLT = v;
+			mConfigureJoystick++;
+		}
+		else if (mConfigureJoystick == 7)
+		{
+			mJoystick.mJoyRT = v;
+			mConfigureJoystick++;
+		}
+	}
+	else if (type == SDL_JOYAXISMOTION)
+	{
+		if (val2 != 0)
+		{
+			if (mConfigureJoystick == 8)
+			{
+				mJoystick.mJoyAxisX = v;
+				mConfigureJoystick++;
+			}
+			else if (mConfigureJoystick == 9)
+			{
+				mJoystick.mJoyAxisY = v;
+				mConfigureJoystick++;
+			}
+		}
+	}
+
+	if (mConfigureJoystick > 9)
+	{
+		EndConfigureJoystick();
+	}
+	else
+	{
+		ShowJoystick();
+	}
+}
+
+void CDesktop::ShowJoystick()
+{
+
+	mLabel->mVisible = true;
+
+	switch (mConfigureJoystick)
+	{
+		case 0:
+			mLabel->SetText("A Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 1:
+			mLabel->SetText("B Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 2:
+			mLabel->SetText("X Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 3:
+			mLabel->SetText("Y Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 4:
+			mLabel->SetText("Select Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 5:
+			mLabel->SetText("Start Button", CText::sFontSmall, 400, 40);
+		break;
+
+		case 6:
+			mLabel->SetText("Left Trigger", CText::sFontSmall, 400, 40);
+		break;
+
+		case 7:
+			mLabel->SetText("Right Trigger", CText::sFontSmall, 400, 40);
+		break;
+
+		case 8:
+			mLabel->SetText("X Axis", CText::sFontSmall, 400, 40);
+		break;
+
+		case 9:
+			mLabel->SetText("Y Axis", CText::sFontSmall, 400, 40);
+		break;
+	}
+}

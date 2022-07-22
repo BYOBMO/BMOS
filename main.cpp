@@ -495,7 +495,7 @@ void handleDesktop(SDL_Event e)
 			const Uint8* state = SDL_GetKeyboardState(NULL);
 			if (state[SDL_SCANCODE_LCTRL] == true)
 			{
-
+				gDesktop->StartConfigureJoystick();
 			}
 		}
 		CWindow::sMouseClickHandled = NULL;
@@ -543,8 +543,13 @@ void handleDesktop(SDL_Event e)
 	else if (e.type == SDL_JOYBUTTONDOWN)
 	{
 		SDL_Event evt;
+
 		//printf("down %d\n", e.jbutton.button);
-		if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
+		if (gDesktop->mConfigureJoystick != -1)
+		{
+			gDesktop->ConfigureJoystick(e.type, e.jbutton.button, 0);
+		}
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
 		{
 			evt.type = SDL_KEYDOWN;
 			evt.key.keysym.sym = SDLK_LCTRL;
@@ -573,8 +578,11 @@ void handleDesktop(SDL_Event e)
 	{
 		SDL_Event evt;
 		//printf("up %d\n", e.jbutton.button);
-
-		if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
+		if (gDesktop->mConfigureJoystick != -1)
+		{
+			gDesktop->ConfigureJoystick(e.type, e.jbutton.button, 0);
+		}
+		else if (e.jbutton.button == gDesktop->mJoystick.mJoyA)
 		{
 			evt.type = SDL_KEYUP;
 			evt.key.keysym.sym = SDLK_LCTRL;
@@ -604,66 +612,70 @@ void handleDesktop(SDL_Event e)
 		SDL_Event evt;
 		//printf("axis %d %d\n", e.jaxis.axis, e.jaxis.value);
 		//Motion on controller 0
-		if (e.jaxis.which == 0)
+		if (gDesktop->mConfigureJoystick != -1)
 		{
-			//X axis motion
-			if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisX)
-			{
-				//Left of dead zone
-				if (e.jaxis.value < -8000)
-				{
-					// Map joystick left to a keyboard stroke.
-					//printf("Stick left\n");
-					evt.type = SDL_KEYDOWN;
-					evt.key.keysym.sym = SDLK_LEFT;
-					evt.key.repeat = 0;
-					SDL_PushEvent(&evt);
-				}
-				//Right of dead zone
-				else if (e.jaxis.value > 8000)
-				{
-					// Map jouystick right to keyboard stroke.
-					//printf("Stick right\n");
-					
-
-					evt.type = SDL_KEYDOWN;
-					evt.key.keysym.sym = SDLK_RIGHT;
-					evt.key.repeat = 0;
-					SDL_PushEvent(&evt);
-				}
-				else
-				{
-					// Zero out the joystick when centered.
-					//printf("Stick X center\n");
-				}
-			}
-			//Y axis motion
-			else if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisY)
-			{
-				//Below of dead zone
-				if (e.jaxis.value < -8000)
-				{
-					//printf("Stick up\n");
-					evt.type = SDL_KEYDOWN;
-					evt.key.keysym.sym = SDLK_UP;
-					evt.key.repeat = 0;
-					SDL_PushEvent(&evt);
-				}
-				//Above of dead zone
-				else if (e.jaxis.value > 8000)
-				{
-					//printf("Stick down\n");
-					evt.type = SDL_KEYDOWN;
-					evt.key.keysym.sym = SDLK_DOWN;
-					evt.key.repeat = 0;
-					SDL_PushEvent(&evt);
-				}
-				else
-				{
-					//printf("Stick Y center\n");
-				}
-			}
+			gDesktop->ConfigureJoystick(e.type, e.jaxis.axis, e.jaxis.value);
 		}
+		//else if (e.jaxis.which == 0)
+		//{
+		//	//X axis motion
+		//	if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisX)
+		//	{
+		//		//Left of dead zone
+		//		if (e.jaxis.value < -8000)
+		//		{
+		//			// Map joystick left to a keyboard stroke.
+		//			//printf("Stick left\n");
+		//			evt.type = SDL_KEYDOWN;
+		//			evt.key.keysym.sym = SDLK_LEFT;
+		//			evt.key.repeat = 0;
+		//			SDL_PushEvent(&evt);
+		//		}
+		//		//Right of dead zone
+		//		else if (e.jaxis.value > 8000)
+		//		{
+		//			// Map jouystick right to keyboard stroke.
+		//			//printf("Stick right\n");
+		//			
+
+		//			evt.type = SDL_KEYDOWN;
+		//			evt.key.keysym.sym = SDLK_RIGHT;
+		//			evt.key.repeat = 0;
+		//			SDL_PushEvent(&evt);
+		//		}
+		//		else
+		//		{
+		//			// Zero out the joystick when centered.
+		//			//printf("Stick X center\n");
+		//		}
+		//	}
+		//	//Y axis motion
+		//	else if (e.jaxis.axis == gDesktop->mJoystick.mJoyAxisY)
+		//	{
+		//		//Below of dead zone
+		//		if (e.jaxis.value < -8000)
+		//		{
+		//			//printf("Stick up\n");
+		//			evt.type = SDL_KEYDOWN;
+		//			evt.key.keysym.sym = SDLK_UP;
+		//			evt.key.repeat = 0;
+		//			SDL_PushEvent(&evt);
+		//		}
+		//		//Above of dead zone
+		//		else if (e.jaxis.value > 8000)
+		//		{
+		//			//printf("Stick down\n");
+		//			evt.type = SDL_KEYDOWN;
+		//			evt.key.keysym.sym = SDLK_DOWN;
+		//			evt.key.repeat = 0;
+		//			SDL_PushEvent(&evt);
+		//		}
+		//		else
+		//		{
+		//			//printf("Stick Y center\n");
+		//		}
+		//	}
+		//}
 	}
 	else if (e.type == SDL_JOYDEVICEADDED)
 	{

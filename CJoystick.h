@@ -38,7 +38,7 @@ public:
     ~CJoystick();
 
     void GetConfig(std::string config_file);
-
+    bool SaveFile(std::string filename);
 
 };
 

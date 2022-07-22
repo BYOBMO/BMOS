@@ -101,3 +101,28 @@ void CJoystick::GetConfig(std::string config_file)
 }
 
 
+bool CJoystick::SaveFile(std::string filename)
+{
+    ofstream ofile(filename.c_str(), ios::out);
+    if (!ofile.is_open())
+    {
+        printf("Can't write settings.txt.\n");
+        return(false);
+    }
+
+    ofile << "A=" << mJoyA << endl;
+    ofile << "B=" << mJoyB << endl;
+    ofile << "X=" << mJoyX << endl;
+    ofile << "Y=" << mJoyY << endl;
+    ofile << "START=" << mJoyStart << endl;
+    ofile << "SELECT=" << mJoySelect << endl;
+    ofile << "RT=" << mJoyRT << endl;
+    ofile << "LT=" << mJoyLT << endl;
+    ofile << "YAXIS=" << mJoyAxisY << endl;
+    ofile << "XAXIS=" << mJoyAxisX << endl;
+
+    ofile.close();
+
+
+    return(true);
+}
