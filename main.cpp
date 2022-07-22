@@ -602,7 +602,7 @@ void handleDesktop(SDL_Event e)
 	else if (e.type == SDL_JOYAXISMOTION)
 	{
 		SDL_Event evt;
-		printf("axis %d %d\n", e.jaxis.axis, e.jaxis.value);
+		//printf("axis %d %d\n", e.jaxis.axis, e.jaxis.value);
 		//Motion on controller 0
 		if (e.jaxis.which == 0)
 		{
