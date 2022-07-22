@@ -3111,7 +3111,7 @@ void CDesktop::EndConfigureJoystick()
 
 void CDesktop::ConfigureJoystick(Uint32 type, Uint8 val, int val2)
 {
-	printf("type=%i, val=%i, val2=%i\n", type, val, val2);
+	//printf("type=%i, val=%i, val2=%i\n", type, val, val2);
 	int v = val;
 
 	if (type == -1)
@@ -3206,7 +3206,7 @@ void CDesktop::ConfigureJoystick(Uint32 type, Uint8 val, int val2)
 	}
 	else if (type == SDL_JOYAXISMOTION)
 	{
-		if (val2 != 0)
+		if (val2 < -8000 || val2 > 8000)
 		{
 			if (mConfigureJoystick == 8)
 			{
