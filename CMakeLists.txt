@@ -40,6 +40,7 @@ CTextReader.cpp
 CMultiLine.cpp 
 CSurface.cpp 
 CSurfWindow.cpp 
+CJoystick.cpp
 CVScrollBar.cpp 
 CListBox.cpp 
 CFolderForm.cpp 
