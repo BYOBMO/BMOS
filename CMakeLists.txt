@@ -62,7 +62,7 @@ CPanel.cpp
 CTitleBar.cpp 
 CDropDownMenu.cpp
 CSettingsForm.cpp)
-target_link_libraries(bmos ${SDL2_LIBRARIES} Boost::filesystem)
+target_link_libraries(bmos ${SDL2_LIBRARIES} Boost::filesystem Boost::regex)
 
 install(TARGETS bmos DESTINATION /home/pi/bmos)
 install(DIRECTORY fonts DESTINATION /home/pi/bmos)
