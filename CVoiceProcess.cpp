@@ -33,10 +33,11 @@ void CVoiceProcess::GetConfig(std::string config_file)
         boost::algorithm::replace_all(line, "\t", "");
 		boost::algorithm::replace_all(line, "\r", "");
 		boost::algorithm::replace_all(line, "\n", "");
-        boost::algorithm::replace_all(line, "*", "[\\s|a-z]*");
+        boost::algorithm::replace_all(line, "*", ".*");
         
         unsigned int loc = line.find("==");
-        if (loc < 500 && loc != string::npos && line[0] != '#') {
+        if (loc < 500 && loc != string::npos && line[0] != '#') 
+        {
             //This isn't a comment and is formatted properly
             string v = line.substr(0, loc);
             string c = line.substr(loc + 2);
@@ -44,7 +45,8 @@ void CVoiceProcess::GetConfig(std::string config_file)
             voice.push_back(v);
             commands.push_back(c);
         }
-        else if (line[0] != '#') {
+        else if (line[0] != '#') 
+        {
             printf("Formatting error on line %d\n", i);
         }
         ++i;
@@ -101,45 +103,10 @@ CVoiceCommand CVoiceProcess::ProcessMessage(std::string message) {
                 rawCommand = commands[i].c_str();
             }
 
-            //std::string s = "a bb ccc dddd";
-            //boost::regex expr{ "a [\\s|a-z]* dddd" };
+            //std::string s = "a what's this ddds";
+            //boost::regex expr{".* dddd" };
             //std::cout << std::boolalpha << boost::regex_match(s, expr) << '\n';
-            //const char c[2] = "*";
-            //char* toks[10];
-            //int num = 0;
-            //char* tok;
-            //int idx;
-            //bool matched = false;
-            //int lastpos = -1;
-
-            //tok = strtok((char*)voice[i].c_str(), c);
-            //while  (tok != NULL)
-            //{
-            //    matched = true;
-            //    toks[num] = tok;
-            //    num++;
-            //    if (num > 9)
-            //    {
-            //        break;
-            //    }
-            //    tok = strtok(NULL, c);
-            //}
-
-            //for (idx = 0; idx < num; idx++)
-            //{
-            //    int tokloc;
-
-            //    tokloc = message.find(toks[idx]);
-            //    if (tokloc == string::npos)
-            //    {
-            //        matched = false;
-            //        break;
-            //    }
-            //    else if (tokloc > lastpos)
-            //    {
-
-            //    }
-            //}
+  
         }
         ++i;
     }
