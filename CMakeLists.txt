@@ -14,7 +14,7 @@ find_package(SDL2 REQUIRED)
     list(APPEND SDL2_LIBRARIES ${_SDL2MIXER_LIB})
 
 include_directories(${SDL2_INCLUDE_DIRS})
-find_package(Boost REQUIRED COMPONENTS filesystem)
+find_package(Boost REQUIRED COMPONENTS filesystem regex)
 
 
 # Define executable target

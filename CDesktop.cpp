@@ -2975,7 +2975,7 @@ void CDesktop::EndRecord()
 	mRecordPid = 0;
 #else
 	CVoiceCommand vc;
-	vc = mVoiceCommands.ProcessMessage("");
+	vc = mVoiceCommands.ProcessMessage("a hi there bob c");
 
 	printf("End recording.\n");
 #endif

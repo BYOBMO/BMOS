@@ -12,6 +12,7 @@
 #include <fstream>
 #include <iostream>
 //#include <filesystem>
+#include <algorithm>
 #include <boost/filesystem.hpp>
 using namespace std;
 
