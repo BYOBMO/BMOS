@@ -220,5 +220,7 @@ public:
 
 	void shutdown();
 	void reboot();
+
+	void ShowDesktop(bool show);
 };
 

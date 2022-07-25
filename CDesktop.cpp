@@ -802,6 +802,8 @@ void CDesktop::OnMenuVoices(CMenuBarItem* item)
 		formx = 100;
 		formy = 100;
 
+		ShowDesktop(true);
+
 		CFolderForm* f = mBeemotes->CreateForm(formx, formy, 250, 400);
 		AddWinForm(f);
 
@@ -859,6 +861,7 @@ void CDesktop::OnMenuPhotos(CMenuBarItem* item)
 		formx = 100;
 		formy = 100;
 
+		ShowDesktop(true);
 		CFolderForm* f = mPhotos->CreateForm(formx, formy, 250, 400);
 		AddWinForm(f);
 
@@ -1060,6 +1063,8 @@ void CDesktop::OnFAQItemDoubleClick(CFolderForm* form, CListBoxItem* lbi)
 
 void CDesktop::OnMenuAbout(CMenuBarItem* item)
 {
+
+	ShowDesktop(true);
 
 	std::string msg = "BMOS\n \nVersion: 3.1415\nStatus: OK";
 	if (mOSStatus == false)
@@ -3072,6 +3077,10 @@ void CDesktop::ProcessGoogleVoice()
 		{
 			OnMenuAbout(NULL);
 		}
+		else if (vc.mArgument == "beemotes" || vc.mArgument == "emotes")
+		{
+			OnMenuVoices(NULL);
+		}
 		else if (vc.mArgument == "videogames")
 		{
 			PlayVideoSync((char*)"videogames.mp4");
@@ -3277,5 +3286,24 @@ void CDesktop::ShowJoystick()
 		case 9:
 			mLabel->SetText("Y Axis", CText::sFontSmall, 400, 40);
 		break;
+	}
+}
+
+
+void CDesktop::ShowDesktop(bool show)
+{
+	if (show)
+	{
+		if (mFace != NULL)
+		{
+			delete(mFace);
+			mFace = NULL;
+		}
+		mVisible = true;
+	}
+	else
+	{
+		mVisible = false;
+		SetFace(1);
 	}
 }
