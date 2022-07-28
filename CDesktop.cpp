@@ -1577,7 +1577,10 @@ void CDesktop::Update()
 	}
 
 
-	if (state[SDL_SCANCODE_UP] == true && (state[SDL_SCANCODE_LSHIFT] == true || state[SDL_SCANCODE_RSHIFT] == true))
+	if ( 
+		(state[SDL_SCANCODE_UP] == true && (state[SDL_SCANCODE_LSHIFT] == true || state[SDL_SCANCODE_RSHIFT] == true)) || 
+		(state[SDL_SCANCODE_1] == true && state[SDL_SCANCODE_5] == true)
+		)
 	{
 		mVisible = !mVisible;
 		if (mVisible == false)
