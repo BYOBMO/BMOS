@@ -1427,6 +1427,8 @@ void CDesktop::Update()
 	bool dirty = false;
 	Uint32 ticks = SDL_GetTicks();
 
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+
 	if (wpid != 0)
 	{
 		CheckPid();
@@ -1435,6 +1437,15 @@ void CDesktop::Update()
 
 	if (mVisible == false)
 	{
+		//if (
+		//	(state[SDL_SCANCODE_UP] == true && (state[SDL_SCANCODE_LSHIFT] == true || state[SDL_SCANCODE_RSHIFT] == true)) ||
+		//	(state[SDL_SCANCODE_1] == true && state[SDL_SCANCODE_5] == true)
+		//	)
+		//{
+		//	ShowDesktop(true);
+		//	return;
+		//}
+
 		if (mSettings.mRandomwVids)
 		{
 			if (mKeyMap.mRandomVids.size()>0 && SDL_TICKS_PASSED_FIXED(ticks, mRandomVideoTimer))
@@ -1547,7 +1558,7 @@ void CDesktop::Update()
 
 	SDL_GetMouseState(&mx, &my);
 	//printf("%d, %d\n", mx, my);
-	const Uint8* state = SDL_GetKeyboardState(NULL);
+
 	bool up, down, left, right;
 
 	x = mx;
