@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef IS_BMO
-#define IS_BMO 0
+#define IS_BMO 1
 #endif
 
 #include<string>
