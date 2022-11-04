@@ -1850,15 +1850,17 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 
 	if (wpid != 0)
 	{
-		printf("wpid=%d stop\n");
+		printf("wpid=%d stop\n", wpid);
 		if ((e.keysym.sym == SDLK_LSHIFT || e.keysym.sym == SDLK_RSHIFT || e.keysym.sym == SDLK_SPACE || e.keysym.sym == SDLK_ESCAPE || e.keysym.sym != SDLK_UP) && e.repeat == 0)
 		{
+			printf("keysym=%d\n", e.keysym.sym);
 			if (e.keysym.sym != SDLK_UP && mVisible == false && mFace != NULL)
 			{
 				// Face mode. DPad can kill videos.
 			}
 			else
 			{
+				printf("dbuscontrol.sh stop \n");
 				system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 			}
 		}
