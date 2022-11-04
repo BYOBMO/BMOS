@@ -1850,6 +1850,7 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 
 	if (wpid != 0)
 	{
+		printf("wpid=%d stop\n");
 		if ((e.keysym.sym == SDLK_LSHIFT || e.keysym.sym == SDLK_RSHIFT || e.keysym.sym == SDLK_SPACE || e.keysym.sym == SDLK_ESCAPE || e.keysym.sym != SDLK_UP) && e.repeat == 0)
 		{
 			if (e.keysym.sym != SDLK_UP && mVisible == false && mFace != NULL)
@@ -2717,7 +2718,7 @@ void CDesktop::PlayVideo(char* filename, int face)
 
 	if (wpid != 0)
 	{
-		printf("video playing...");
+		printf("video playing...\n");
 		return;
 	}
 
