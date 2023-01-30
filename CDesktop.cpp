@@ -2719,7 +2719,7 @@ void CDesktop::PlayVideo(char* filename, int face)
 	}
 
 	char* argv[] = { (char*)"vlc", 
-		(char*)"-play-and-exit",
+		(char*)"--play-and-exit",
 		(char*)"--no-video-title-show",
 		//(char*)"--layer",
 		//(char*)"10010",
