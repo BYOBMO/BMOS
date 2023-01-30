@@ -152,6 +152,7 @@
     <ClCompile Include="CPanel.cpp" />
     <ClCompile Include="CPhoto.cpp" />
     <ClCompile Include="CPhotoViewer.cpp" />
+    <ClCompile Include="CreateProcess.cpp" />
     <ClCompile Include="CRectangle.cpp" />
     <ClCompile Include="CSelectionList.cpp" />
     <ClCompile Include="CSettings.cpp" />
@@ -215,6 +216,7 @@
     <ClInclude Include="CVScrollBar.h" />
     <ClInclude Include="CWiFi.h" />
     <ClInclude Include="CWindow.h" />
+    <ClInclude Include="BmoProcess.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>

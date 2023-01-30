@@ -35,6 +35,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#else
+#include "BmoProcess.h"
 #endif
 
 void SDL_Refresh();
@@ -2716,19 +2718,26 @@ void CDesktop::PlayVideo(char* filename, int face)
 		return;
 	}
 
-	char* argv[] = { (char*)"omxplayer", 
-		(char*)"--aspect-mode",
-		(char*)"fill",
-		(char*)"--layer",
-		(char*)"10010",
-		(char*)"-o",
-		(char*)"alsa", 
-		(char*)"--no-keys", 
-		(char*)"--no-osd", (char*)
-		vide, NULL };
+	char* argv[] = { (char*)"vlc", 
+		(char*)"-play-and-exit",
+		(char*)"--no-video-title-show",
+		//(char*)"--layer",
+		//(char*)"10010",
+		//(char*)"-o",
+		//(char*)"alsa", 
+		//(char*)"--no-keys", 
+		//(char*)"--no-osd", 
+		(char*)vide, NULL };
 
 #ifdef WINDOWS
 	//printf("PlayVideo(%s)\n", filename);
+	char cmd[1024];
+	unsigned int h = GetHwnd();
+	void **p = (void**)h;
+	
+	sprintf(cmd, "vlc --play-and-exit --video-wallpaper --video-on-top --no-video-title-show --qt-minimal-view --no-embedded-video --qt-start-minimized --drawable-hwnd=%u c:\\home\\pi\\bmos\\videos\\%s", h, filename);
+	printf("%s\n", cmd);
+	BmoProcess((char*)cmd);
 #else
 
 
@@ -2747,7 +2756,7 @@ void CDesktop::PlayVideo(char* filename, int face)
 		int fd = open("/dev/null", O_RDWR, S_IRUSR | S_IWUSR);
 
 		dup2(fd, 1);   // make stdout go to file
-		execvp("omxplayer", argv);
+		execvp("vlc", argv);
 		close(fd);
 	}
 	else {

@@ -191,7 +191,7 @@ bool init()
 
 #ifdef WINDOWS
 		unsigned int windowFlags = getWindowFlags();
-		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 720, 480, windowFlags);
+		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, windowFlags);
 #else
 		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 720, 480, SDL_WINDOW_FULLSCREEN_DESKTOP);
 #endif
@@ -781,7 +781,7 @@ int main(int argc, char **argv)
 			// On success, print the current display mode.
 			SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", 0, current.w, current.h, current.refresh_rate);
 #ifdef WINDOWS
-			dispW = 720;
+			dispW = 640;
 			dispH = 480;
 #else
 			dispW = current.w;
