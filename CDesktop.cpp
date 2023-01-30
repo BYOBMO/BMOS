@@ -1858,7 +1858,7 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 			//printf("dbuscontrol.sh stop \n");
 			//system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 #ifndef WINDOWS
-			kill(wpid 9);
+			kill(wpid, 9);
 #endif
 		}
 		return(NULL);
