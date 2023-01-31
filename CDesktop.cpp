@@ -2677,7 +2677,7 @@ void CDesktop::PlayVideoSync(char* filename)
 #ifdef WINDOWS
 	//printf("PlayVideo(%s)\n", filename);
 #else
-	sprintf(s, "cvlc --qt-minimal-view --play-and-exit --no-embedded-video --no-xlib --video-wallpaper /home/pi/bmos/videos/%s > /dev/null", filename);
+	sprintf(s, "cvlc --no-video-title-show --qt-minimal-view --play-and-exit --no-embedded-video --no-xlib --video-wallpaper /home/pi/bmos/videos/%s > /dev/null", filename);
 	system(s);
 #endif
 
