@@ -21,6 +21,8 @@ sudo apt-get install libsdl2-ttf-dev
   ```
 sudo apt-get install libsdl2-mixer-dev
 ```
+  sudo apt-get install libboost-all-dev
+```
 
   ## Build
   ```
