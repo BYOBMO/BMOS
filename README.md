@@ -12,6 +12,9 @@ Fonts are licensed under their respective licenses. See fonts folder for specifi
 ```
 sudo apt update
 ```
+```
+sudo apt-get install cmake
+```
   ```
 sudo apt-get install libsdl2-image-dev
   ```
