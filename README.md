@@ -9,6 +9,9 @@ Source code in this project is licensed under GNU General Public License v3.0
 Fonts are licensed under their respective licenses. See fonts folder for specific licenses.
   
 ## Install
+Make sure you have installed all of this first:
+https://github.com/BYOBMO/BMO-Utils
+
 ```
 sudo apt update
 ```
@@ -39,6 +42,7 @@ make install
   
 ## Manual Start
   ```
+  cd /home/pi/bmos
   /home/pi/bmos/bmos
   ```
   
