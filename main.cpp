@@ -67,7 +67,7 @@ int dispW, dispH;
 //CTexture *gCursor;
 CDesktop *gDesktop;
 SDL_Joystick *gGameController;
-
+SDL_DisplayMode current;
 
 enum GameMode
 {
@@ -187,13 +187,36 @@ bool init()
 
 		setupWindow();
 
+		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
+
+		if (should_be_zero != 0)
+		{
+			// In case of error...
+			SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
+		}
+		else
+		{
+			// On success, print the current display mode.
+			SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", 0, current.w, current.h, current.refresh_rate);
+#ifdef WINDOWS
+			dispW = 800;
+			dispH = 600;
+#else
+			dispW = current.w;
+			dispH = current.h;
+#endif
+
+			SDL_Log("dispW: %d, dispH: %d", dispW, dispH);
+		}
+
+
 		//Create window
 
 #ifdef WINDOWS
 		unsigned int windowFlags = getWindowFlags();
-		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, windowFlags);
+		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, dispW, dispH, windowFlags);
 #else
-		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 720, 480, SDL_WINDOW_FULLSCREEN_DESKTOP);
+		gWindow = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, dispW, dispH, SDL_WINDOW_FULLSCREEN_DESKTOP);
 #endif
 		if (gWindow == NULL)
 		{
@@ -202,6 +225,10 @@ bool init()
 		}
 		else
 		{
+#ifndef WINDOWS
+			SDL_SetWindowBordered(gWindow, SDL_FALSE);
+#endif
+
 			CApplication::sWindow = gWindow;
 			//Create renderer for window
 			gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -767,27 +794,9 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		SDL_DisplayMode current;
+		
 
-		int should_be_zero = SDL_GetCurrentDisplayMode(0, &current);
 
-		if (should_be_zero != 0)
-		{
-			// In case of error...
-			SDL_Log("Could not get display mode for video display #%d: %s", 0, SDL_GetError());
-		}
-		else
-		{
-			// On success, print the current display mode.
-			SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", 0, current.w, current.h, current.refresh_rate);
-#ifdef WINDOWS
-			dispW = 640;
-			dispH = 480;
-#else
-			dispW = current.w;
-			dispH = current.h;
-#endif
-		}
 
 
 		SDL_SetRenderDrawColor(gRenderer, 0, 255, 255, 255);

@@ -1855,10 +1855,11 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 		printf("wpid=%d stop\n", wpid);
 		if ((e.keysym.sym == SDLK_LSHIFT || e.keysym.sym == SDLK_RSHIFT || e.keysym.sym == SDLK_SPACE || e.keysym.sym == SDLK_ESCAPE || e.keysym.sym != SDLK_UP) && e.repeat == 0)
 		{
-			//printf("dbuscontrol.sh stop \n");
-			//system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 #ifndef WINDOWS
-			kill(wpid, 9);
+			printf("dbuscontrol.sh stop \n");
+			system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
+
+			//kill(wpid, 9);
 #endif
 		}
 		return(NULL);
@@ -1972,9 +1973,10 @@ CWindow* CDesktop::OnKeyDown(SDL_KeyboardEvent e)
 			if (wpid != 0)
 			{
 #ifndef WINDOWS
-				kill(wpid, 9);
+				//kill(wpid, 9);
+
+				system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 #endif
-				//system("/home/pi/bmos/scripts/dbuscontrol.sh stop");
 			}
 
 			int r1 = std::rand();
@@ -2677,7 +2679,7 @@ void CDesktop::PlayVideoSync(char* filename)
 #ifdef WINDOWS
 	//printf("PlayVideo(%s)\n", filename);
 #else
-	sprintf(s, "cvlc --no-video-title-show --qt-minimal-view --play-and-exit --no-embedded-video --no-xlib --video-wallpaper /home/pi/bmos/videos/%s > /dev/null", filename);
+	sprintf(s, "omxplayer --aspect-mode fill --layer 10010 -o alsa --no-keys --no-osd /home/pi/bmos/videos/%s > /dev/null &", filename);
 	system(s);
 #endif
 
@@ -2724,16 +2726,16 @@ void CDesktop::PlayVideo(char* filename, int face)
 		return;
 	}
 
-	char* argv[] = { (char*)"cvlc", 
-		(char*)"--play-and-exit",
-		(char*)"--no-video-title-show",
-		//(char*)"--layer",
-		//(char*)"10010",
-		//(char*)"-o",
-		//(char*)"alsa", 
-		//(char*)"--no-keys", 
-		//(char*)"--no-osd", 
-		(char*)vide, NULL };
+	char* argv[] = { (char*)"omxplayer",
+		(char*)"--aspect-mode",
+		(char*)"fill",
+		(char*)"--layer",
+		(char*)"10010",
+		(char*)"-o",
+		(char*)"alsa",
+		(char*)"--no-keys",
+		(char*)"--no-osd", (char*)
+		vide, NULL };
 
 #ifdef WINDOWS
 	//printf("PlayVideo(%s)\n", filename);
@@ -2762,7 +2764,7 @@ void CDesktop::PlayVideo(char* filename, int face)
 		int fd = open("/dev/null", O_RDWR, S_IRUSR | S_IWUSR);
 
 		dup2(fd, 1);   // make stdout go to file
-		execvp("cvlc", argv);
+		execvp("omxplayer", argv);
 		close(fd);
 	}
 	else {
@@ -2801,16 +2803,14 @@ void CDesktop::PlayVideoUSB(char* filename, int face)
 	sprintf(vide, "/media/usb/%s", filename);
 	char c2;
 
-	char* argv[] = { (char*)"cvlc",
-	(char*)"--play-and-exit",
-	(char*)"--no-video-title-show",
-		//(char*)"--layer",
-		//(char*)"10010",
-		//(char*)"-o",
-		//(char*)"alsa", 
-		//(char*)"--no-keys", 
-		//(char*)"--no-osd", 
-		(char*)vide, NULL };
+	char* argv[] = { (char*)"omxplayer",
+		(char*)"--layer",
+		(char*)"10010",
+		(char*)"-o",
+		(char*)"alsa",
+		(char*)"--no-keys",
+		(char*)"--no-osd", (char*)
+		vide, NULL };
 
 #ifdef WINDOWS
 	//printf("PlayVideo(%s)\n", filename);
@@ -2831,7 +2831,7 @@ void CDesktop::PlayVideoUSB(char* filename, int face)
 		return;
 	}
 	else if (pid == 0) {
-		execvp("cvlc", argv);
+		execvp("omxplayer", argv);
 	}
 	else {
 		wpid = pid;
