@@ -59,11 +59,17 @@ cd /home/pi/bmos
 sudo cp /home/pi/bmos/scripts/10-bmos.sh /etc/profile.d
 sudo chmod +r /etc/profile.d/10-bmos.sh
 ```
-
+## Modes
+BMO has two modes, face and desktop. In face mode you can press keys on the keyboard and they will execute the key mappings in your bmo.txt file (see below).
+  
+When in face mode you can double-click the green button (ALT key on the keyboard) to switch to desktop mode. You can also press the red button to start recording for voice recognition. Voice recognition must be turned on in the settings first. Hold the button until you are done speaking and BMO will attempt to match your command to what is in the commands.conf file.
+  
+ In desktop mode you can use the DPad and the green button for mouse navigation and selection. Or, if you have a mouse plugged into the USB port, you can mouse as you woudl on a desktop PC. Holding the blue (triangle) button for a few seconds toggles between snap mode which makes the DPad cycle through the UI elements for easier selection. An icon in the upper right corner of the desktop shows which mode you are in.
+  
 ## Key Mappings
 Keys are mapped in the /home/pi/bmos/bmo.txt file.
 
-Supported commands are face, mp4, system, and vg.
+Supported commands are face, mp4, system, random, and vg.
 
 ### face
 The face command changes BMO's static face.
@@ -99,6 +105,18 @@ Z:system:/home/pi/bmos/scripts/waveleft.sh
 
 Executes the script tha waves BMO's left arm.
 
+### random
+The random command created a list of videos to be played randomly. They are played when you press up on BMO's DPad or if you turn on random videos in the settings.  
+  
+Example:
+```
+random:hello.mp4
+random:homies.mp4
+random:ah.mp4
+```
+  
+ Adds hello.mp4, homies.mp4, and ah.mp4 to the random list.
+  
 ### vg
 The "vg" command will launch EmulationStation.
 Example:
