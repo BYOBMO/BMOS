@@ -12,7 +12,7 @@
 q:mp4:hello.mp4:bmo01.jpg
 w:mp4:AllYourBase.mp4:bmo07.jpg
 e:mp4:beep1.mp4:bmo03.jpg
-r:mp4:beep12.mp4:bmo01.jpg
+r:mp4:beep2.mp4:bmo01.jpg
 t:mp4:bemore2.mp4:bmo01.jpg
 y:mp4:birsday.mp4:bmo07.jpg
 u:mp4:ipad2.mp4:bmo01.jpg
