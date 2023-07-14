@@ -3026,6 +3026,10 @@ void CDesktop::ProcessGoogleVoice()
 	CVoiceCommand vc;
 
 	char message[1000];
+	char stout[1000];
+	int n = 0;
+	int c;
+
 	FILE* cmd = NULL;
 	
 	if (boost::filesystem::exists("out.wav"))
@@ -3041,9 +3045,18 @@ void CDesktop::ProcessGoogleVoice()
 	string command = "/home/pi/bmos/scripts/google-voice.sh";
 
 	cmd = popen(command.c_str(), "r");
-	fscanf(cmd, "\"%[^\"\n]\"", message);
-	printf("exce: %s\n", command.c_str());
-	printf("stdout: %s\n", cmd);
+	c = fgetc(cmd);
+	while (c != EOF)
+	{
+		stout[n] = (char)c;
+		n++;
+		c = fgetc(cmd);
+	}
+	stout[n] = '\0';
+
+	printf("exec: %s\n", command.c_str());
+	printf("stdout: %s\n", stout);
+	sscanf(stout, "\"%[^\"\n]\"", message);
 	printf("Message: %s\n", message);
 
 	std::string msg = message;
