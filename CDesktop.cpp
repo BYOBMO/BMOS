@@ -3027,14 +3027,23 @@ void CDesktop::ProcessGoogleVoice()
 
 	char message[1000];
 	FILE* cmd = NULL;
-	printf("Found audio\n");
+	
+	if (boost::filesystem::exists("out.wav")
+	{
+		printf("Found audio\n");
+	}
+	else
+	{
+		printf("Audio file not found\n");
+		return;
+	}
 #ifndef WINDOWS
 	string command = "/home/pi/bmos/scripts/google-voice.sh";
 
 	cmd = popen(command.c_str(), "r");
 	fscanf(cmd, "\"%[^\"\n]\"", message);
 	printf("Cmd: %s\n", command.c_str());
-	printf("Mess: %s\n", message);
+	printf("Message: %s\n", message);
 
 	std::string msg = message;
 
