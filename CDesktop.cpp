@@ -3043,7 +3043,7 @@ void CDesktop::ProcessGoogleVoice()
 	cmd = popen(command.c_str(), "r");
 	fscanf(cmd, "\"%[^\"\n]\"", message);
 	printf("exce: %s\n", command.c_str());
-	printf("stdout: %s\n", cmd.c_str());
+	printf("stdout: %s\n", cmd);
 	printf("Message: %s\n", message);
 
 	std::string msg = message;
