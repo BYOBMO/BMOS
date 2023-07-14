@@ -3028,7 +3028,7 @@ void CDesktop::ProcessGoogleVoice()
 	char message[1000];
 	FILE* cmd = NULL;
 	
-	if (boost::filesystem::exists("out.wav")
+	if (boost::filesystem::exists("out.wav"))
 	{
 		printf("Found audio\n");
 	}
