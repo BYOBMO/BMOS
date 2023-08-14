@@ -508,6 +508,8 @@ void CDesktop::OnHelp(CMenuBarItem* item)
 
 void CDesktop::Init(bool desktop)
 {
+	ProcessGoogleVoice();
+
 	if (desktop)
 	{
 		mVisible = true;
@@ -3025,13 +3027,26 @@ void CDesktop::ProcessGoogleVoice()
 {
 	CVoiceCommand vc;
 
-	char message[1000];
+	//char message[1000];
+	std::string message;
+
 	char stout[1000];
 	int n = 0;
 	int c;
 
 	FILE* cmd = NULL;
 	
+	stout[n] = '\0';
+
+
+
+
+	//string str = "result2:\n{   'alternative': [{'confidence': 0.86642277, 'transcript' : 'hello'},\n{ 'confidence': 0.86642277, 'transcript' : 'hellow' },\n{ 'confidence': 0.86642277, 'transcript' : 'hellos' }, \n{ 'confidence': 0.86642277, 'transcript' : 'hellooooo' }, \n{ 'confidence': 0.86642277, 'transcript' : 'helloooooo' }] , \n'final' : True}\n\"hello\"\n";
+
+
+
+	return;
+
 	if (boost::filesystem::exists("out.wav"))
 	{
 		printf("Found audio\n");
@@ -3056,8 +3071,25 @@ void CDesktop::ProcessGoogleVoice()
 
 	printf("exec: %s\n", command.c_str());
 	printf("stdout: %s\n", stout);
-	sscanf(stout, "\"%[^\"\n]\"", message);
-	printf("Message: %s\n", message);
+
+	std::string str;
+	str = stout;
+
+	size_t x1 = str.find_first_of('"');
+	size_t x2 = str.find_last_of('"');
+	if (x1 >= 0 && x2 > 0)
+	{
+		message = str.substr(x1 + 1, x2 - x1 - 1);
+	}
+	else
+	{
+		printf("voice response not translated.");
+		return;
+	}
+
+	//sscanf(stout, "\"%[^\"\n]\"", message);
+
+	printf("Message: %s\n", message.c_str());
 
 	std::string msg = message;
 
