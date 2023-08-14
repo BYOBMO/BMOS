@@ -3037,15 +3037,6 @@ void CDesktop::ProcessGoogleVoice()
 	
 	stout[n] = '\0';
 
-
-
-
-	//string str = "result2:\n{   'alternative': [{'confidence': 0.86642277, 'transcript' : 'hello'},\n{ 'confidence': 0.86642277, 'transcript' : 'hellow' },\n{ 'confidence': 0.86642277, 'transcript' : 'hellos' }, \n{ 'confidence': 0.86642277, 'transcript' : 'hellooooo' }, \n{ 'confidence': 0.86642277, 'transcript' : 'helloooooo' }] , \n'final' : True}\n\"hello\"\n";
-
-
-
-	return;
-
 	if (boost::filesystem::exists("out.wav"))
 	{
 		printf("Found audio\n");
