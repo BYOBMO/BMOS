@@ -508,7 +508,6 @@ void CDesktop::OnHelp(CMenuBarItem* item)
 
 void CDesktop::Init(bool desktop)
 {
-	ProcessGoogleVoice();
 
 	if (desktop)
 	{
